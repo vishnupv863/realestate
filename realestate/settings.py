@@ -125,3 +125,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 ALLOWED_HOSTS = ["*"]  # For testing; later replace with Render’s domain
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+import os
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-dev-key")
