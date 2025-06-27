@@ -1,5 +1,5 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 
 
-def vendor_list(request):
-    return render(request, "vendors/vendor_list.html")
+def listing_list(request):
+    return JsonResponse({"listings": ["House A", "House B", "Land C"]})

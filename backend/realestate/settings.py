@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "listings",  # Custom app for property listings
     "vendors",  # Custom app for vendors
+    "corsheaders",  # For handling CORS
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "realestate.urls"
@@ -129,3 +132,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 import os
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-dev-key")
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
