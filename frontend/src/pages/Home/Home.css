@@ -1,0 +1,38 @@
+body {
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.home-container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 48px 32px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  text-align: center;
+}
+
+h1 {
+  color: #22304a;
+  font-size: 2.7rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  color: #3a7bd5;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: 18px 0 0 0;
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+}
+
+h2:hover {
+  color: #22304a;
+  cursor: pointer;
+}

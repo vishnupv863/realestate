@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./Home.css";
 
 function Home() {
   const [listings, setListings] = useState([]);
@@ -13,12 +14,9 @@ function Home() {
 
   return (
     <div>
-      <h2>Listings</h2>
-      <ul>
-        {listings.map((item, i) => (
-          <li key={i}>{item}</li>
-        ))}
-      </ul>
+      <h1>Your one-stop destination for finding the perfect property..</h1>
+      <h2>Properties?</h2>
+      <h2>Vendors?</h2>
     </div>
   );
 }
