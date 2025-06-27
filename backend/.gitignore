@@ -1,49 +1,43 @@
-# 🧠 Python
+# Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-*.swp
+*.so
+*.log
 
-# 🧪 Test and coverage
-.coverage
-htmlcov/
-.tox/
-nosetests.xml
-coverage.xml
-*.cover
-
-# 🐍 Virtualenv
-env/
+# Virtual environment
 venv/
-ENV/
-.venv/
-*.env
-*.venv
+.env/
 .envrc
 
-# 💾 Django stuff
+# Django-specific
 db.sqlite3
-*.log
-*.pot
-*.pyc
+*.sqlite3
+media/
+staticfiles/
+static_root/
+local_settings.py
 
-# ⚙️ IDE/Editor
+# VS Code, PyCharm, and other IDEs
 .vscode/
 .idea/
-*.sublime-project
-*.sublime-workspace
 
-# 📦 Packaging
-*.egg-info/
-dist/
-build/
-.eggs/
+# Migrations (optional - only if you don't want to track them)
+# **Caution**: Comment this out if you're sharing migrations
+# */migrations/
+# */migrations/*.py
+# */migrations/*.pyc
 
-# 🚫 OS-specific
+# Compiled files
+*.mo
+*.pot
+
+# OS-generated files
 .DS_Store
 Thumbs.db
 
-# 💬 Local settings or secrets (optional)
-*.local
-.env
+# Render or deployment-specific
+*.pid
+*.gz
+*.egg-info/
