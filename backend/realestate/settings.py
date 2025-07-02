@@ -135,5 +135,5 @@ import os
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-dev-key")
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    "https://realestate-kappa-six.vercel.app/",
 ]
