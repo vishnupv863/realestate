@@ -1,8 +1,9 @@
 function Vendors() {
   return (
     <div>
-      <h1>Vendors</h1>
-      <p>List of vendors will be displayed here.</p>
+      <h1>Welcome Mr:Vendors</h1>
+      <a href="">Add new property</a> <br />
+      <a href="">Get your uploads</a>
     </div>
   );
 }
