@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "listings",  # Custom app for property listings
     "vendors",  # Custom app for vendors
     "corsheaders",  # For handling CORS
+    "properties",  # Custom app for properties
 ]
 
 MIDDLEWARE = [
