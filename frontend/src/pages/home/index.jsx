@@ -1,9 +1,16 @@
+import { Link } from "react-router-dom";
 function Home() {
   return (
     <div>
       <h1>Your one-stop destination for finding the perfect property..</h1>
-      <a href="/properties">Properties?</a>
-      <a href="/vendors">Vendors?</a>
+      <Link to="/properties">Properties?</Link>
+      <br />
+      <Link to="/vendors">Vendors?</Link>
+      <br />
+      <Link to="/login">Login</Link>
+      <br />
+      <Link to="/register">Register</Link>
+      <br />
     </div>
   );
 }
