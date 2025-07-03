@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 function Vendors() {
   return (
     <div>
       <h1>Welcome Mr:Vendors</h1>
-      <a href="">Add new property</a> <br />
-      <a href="">Get your uploads</a>
+      <Link to="/add-properties">Add new property</Link> <br />
+      <Link to="/uploads">Get your uploads</Link>
     </div>
   );
 }
