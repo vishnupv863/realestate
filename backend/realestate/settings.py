@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "listings",  # Custom app for property listings
     "vendors",  # Custom app for vendors
+    "accounts",  # Custom app for user accounts
     "corsheaders",  # For handling CORS
     "properties",  # Custom app for properties
+    "rest_framework",
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -83,11 +86,11 @@ import os
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": os.environ.get("DB_HOST"),
-        "PORT": os.environ.get("DB_PORT"),
+        "NAME": "realestate",  # ✅ name of your local DB
+        "USER": "postgres",  # your PostgreSQL username (default: postgres)
+        "PASSWORD": "1234",  # the password you set during PostgreSQL install
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
@@ -144,3 +147,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://realestate-kappa-six.vercel.app",
     "http://localhost:5173",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+# settings.py
+CSRF_TRUSTED_ORIGINS = ["http://localhost:5173", "https://your-vercel-site.vercel.app"]
