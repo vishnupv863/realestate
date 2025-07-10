@@ -154,3 +154,19 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 # settings.py
 CSRF_TRUSTED_ORIGINS = ["http://localhost:5173", "https://your-vercel-site.vercel.app"]
+
+# Django REST Framework settings
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
+# For HTTPS environments
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "Lax"  # or "None" if cross-site
+CSRF_COOKIE_SAMESITE = "Lax"

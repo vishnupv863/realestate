@@ -6,19 +6,21 @@ User = get_user_model()
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True, validators=[validate_password])
     confirm_password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ("username", "email", "password", "confirm_password")
+        fields = ("name", "email", "phone", "password", "confirm_password")
 
     def validate(self, data):
+        if not data.get("email") and not data.get("phone"):
+            raise serializers.ValidationError("Either email or phone must be provided.")
         if data["password"] != data["confirm_password"]:
             raise serializers.ValidationError("Passwords must match.")
         return data
 
     def create(self, validated_data):
         validated_data.pop("confirm_password")
-        user = User.objects.create_user(**validated_data)
-        return user
+        return User.objects.create_user(**validated_data)
