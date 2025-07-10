@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/home";
@@ -5,7 +6,15 @@ import Properties from "./pages/properties";
 import Vendors from "./pages/vendors";
 import AddPropertyForm from "./components/forms/AddPropertyForm";
 import Login from "./pages/auth/Login";
+
 function App() {
+  useEffect(() => {
+    // Fetch CSRF token when app loads
+    fetch("http://127.0.0.1:8000/auth/csrf/", {
+      credentials: "include",
+    });
+  }, []);
+
   return (
     <Router>
       <Routes>
