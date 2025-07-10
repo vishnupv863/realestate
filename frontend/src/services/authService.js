@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../config";
+import { getCookie } from "../utils/cookies";
 
 function getCookie(name) {
   const cookies = document.cookie.split("; ");
