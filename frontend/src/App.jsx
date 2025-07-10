@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import Properties from "./pages/properties";
 import Vendors from "./pages/vendors";
 import AddPropertyForm from "./components/forms/AddPropertyForm";
+import Register from "./pages/auth/Register";
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/properties" element={<Properties />} />
         <Route path="/vendors" element={<Vendors />} />
         <Route path="/add-properties" element={<AddPropertyForm />} />
+        <Route path="/register" element={<Register />} />
 
         {/* Add more routes as needed */}
       </Routes>
