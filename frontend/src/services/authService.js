@@ -18,7 +18,6 @@ export const register = async (userData) => {
       "X-CSRFToken": getCookie("csrftoken"),
     },
   });
-  console.log("Registration successful", userData);
 };
 
 export const logout = async () => {
