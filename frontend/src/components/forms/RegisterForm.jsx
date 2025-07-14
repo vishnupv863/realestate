@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { register } from "../../services/authService";
 import { useNavigate } from "react-router-dom"; // ✅ import hook
+import GoogleLoginButton from "../auth/GoogleLoginButton"; // ✅ import Google login button
 
 const RegisterForm = () => {
   const navigate = useNavigate(); // ✅ create navigate instance
@@ -79,7 +80,6 @@ const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Register</h2>
-
       <div>
         <label>Name</label>
         <input
@@ -90,7 +90,6 @@ const RegisterForm = () => {
         />
         {errors.name && <span>{errors.name}</span>}
       </div>
-
       <div>
         <label>Email</label>
         <input
@@ -101,7 +100,6 @@ const RegisterForm = () => {
         />
         {errors.email && <span>{errors.email}</span>}
       </div>
-
       <div>
         <label>Phone Number</label>
         <input
@@ -111,7 +109,6 @@ const RegisterForm = () => {
           onChange={handleChange}
         />
       </div>
-
       <div>
         <label>Password</label>
         <input
@@ -122,7 +119,6 @@ const RegisterForm = () => {
         />
         {errors.password && <span>{errors.password}</span>}
       </div>
-
       <div>
         <label>Confirm Password</label>
         <input
@@ -133,10 +129,10 @@ const RegisterForm = () => {
         />
         {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
       </div>
-
       <button type="submit">Register</button>
-
       {message && <p>{message}</p>}
+      <hr />
+      <GoogleLoginButton /> {/* ✅ Add Google login button */}
     </form>
   );
 };
