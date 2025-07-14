@@ -7,12 +7,11 @@ import Vendors from "./pages/vendors";
 import AddPropertyForm from "./components/forms/AddPropertyForm";
 import Register from "./pages/auth/Register";
 
+import { fetchCSRFToken } from "./utils/csrf"; // ✅ import your helper
+
 function App() {
   useEffect(() => {
-    // Fetch CSRF token when app loads
-    fetch("http://127.0.0.1:8000/auth/csrf/", {
-      credentials: "include",
-    });
+    fetchCSRFToken(); // ✅ request CSRF cookie on app load
   }, []);
 
   return (
@@ -23,7 +22,6 @@ function App() {
         <Route path="/vendors" element={<Vendors />} />
         <Route path="/add-properties" element={<AddPropertyForm />} />
         <Route path="/register" element={<Register />} />
-
         {/* Add more routes as needed */}
       </Routes>
     </Router>

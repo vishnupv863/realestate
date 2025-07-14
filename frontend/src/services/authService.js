@@ -1,15 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../config";
-import { getCookie } from "../utils/cookies";
-
-function getCookie(name) {
-  const cookies = document.cookie.split("; ");
-  for (let cookie of cookies) {
-    const [key, value] = cookie.split("=");
-    if (key === name) return decodeURIComponent(value);
-  }
-  return null;
-}
+import { getCookie } from "../utils/cookies"; // ✅ Use this only
 
 export const login = async (credentials) => {
   return await axios.post(`${BASE_URL}/auth/login`, credentials, {
@@ -21,12 +12,13 @@ export const login = async (credentials) => {
 };
 
 export const register = async (userData) => {
-  return await axios.post(`${BASE_URL}/auth/register`, userData, {
+  return await axios.post(`${BASE_URL}/auth/register/`, userData, {
     withCredentials: true,
     headers: {
       "X-CSRFToken": getCookie("csrftoken"),
     },
   });
+  console.log("Registration successful", userData);
 };
 
 export const logout = async () => {
