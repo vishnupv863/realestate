@@ -20,9 +20,10 @@ export const register = async (userData) => {
   });
 };
 
+// Logout user and clear session
 export const logout = async () => {
   return await axios.post(
-    `${BASE_URL}/auth/logout`,
+    `${BASE_URL}/auth/logout/`, // ✅ Ensure trailing slash
     {},
     {
       withCredentials: true,
