@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt, csrf_protect
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
 import json

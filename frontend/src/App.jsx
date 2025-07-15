@@ -6,6 +6,7 @@ import Properties from "./pages/properties";
 import Vendors from "./pages/vendors";
 import AddPropertyForm from "./components/forms/AddPropertyForm";
 import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login"; // ✅ import your Login page
 
 import { fetchCSRFToken } from "./utils/csrf"; // ✅ import your helper
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/vendors" element={<Vendors />} />
         <Route path="/add-properties" element={<AddPropertyForm />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>

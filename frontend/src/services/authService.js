@@ -3,7 +3,7 @@ import { BASE_URL } from "../config";
 import { getCookie } from "../utils/cookies"; // ✅ Use this only
 
 export const login = async (credentials) => {
-  return await axios.post(`${BASE_URL}/auth/login`, credentials, {
+  return await axios.post(`${BASE_URL}/auth/login/`, credentials, {
     withCredentials: true,
     headers: {
       "X-CSRFToken": getCookie("csrftoken"),
