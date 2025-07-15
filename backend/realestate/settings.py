@@ -42,9 +42,24 @@ INSTALLED_APPS = [
     "accounts",  # Custom app for user accounts
     "corsheaders",  # For handling CORS
     "properties",  # Custom app for properties
+    "django.contrib.sites",  # For site framework
+    # Allauth + social
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    # Rest framework + auth
     "rest_framework",
     "rest_framework_simplejwt",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
 ]
+
+SITE_ID = 2  # Must match the Site entry in your database
+
+
+REST_USE_JWT = False  # We're using session authentication
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -55,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "realestate.urls"

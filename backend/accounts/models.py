@@ -10,7 +10,10 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, email=None, phone=None, password=None, **extra_fields):
         if not email and not phone:
             raise ValueError("Either email or phone must be provided.")
+
         email = self.normalize_email(email) if email else None
+        username = email or phone  # auto-fill username if needed by admin/allauth
+        extra_fields.setdefault("username", username)
 
         user = self.model(email=email, phone=phone, **extra_fields)
         user.set_password(password)
@@ -24,6 +27,9 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(
+        max_length=150, unique=True, null=True, blank=True
+    )  # ✅ added
     name = models.CharField(max_length=150, null=True, blank=True)
     email = models.EmailField(unique=True, null=True, blank=True)
     phone = models.CharField(max_length=15, unique=True, null=True, blank=True)

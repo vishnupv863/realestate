@@ -2,14 +2,22 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
-from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt, csrf_protect
 from django.utils.decorators import method_decorator
+from django.http import JsonResponse
+import json
+
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
 
 from .models import CustomUser
 from .serializers import RegisterSerializer
 
+User = get_user_model()
 
+
+# -------------------- CSRF --------------------
 @method_decorator(ensure_csrf_cookie, name="dispatch")
 class GetCSRFToken(APIView):
     permission_classes = [AllowAny]
@@ -18,6 +26,7 @@ class GetCSRFToken(APIView):
         return Response({"message": "CSRF cookie set"}, status=200)
 
 
+# -------------------- Register --------------------
 @method_decorator(ensure_csrf_cookie, name="dispatch")
 class RegisterView(APIView):
     permission_classes = [AllowAny]
@@ -35,13 +44,13 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# -------------------- Login (email or phone) --------------------
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
         login_input = request.data.get("login")
         password = request.data.get("password")
-        user = None
 
         if not login_input or not password:
             return Response(
@@ -54,7 +63,9 @@ class LoginView(APIView):
                 user_obj = CustomUser.objects.get(email=login_input)
             else:
                 user_obj = CustomUser.objects.get(phone=login_input)
+
             user = authenticate(request, email=user_obj.email, password=password)
+
         except CustomUser.DoesNotExist:
             return Response(
                 {"error": "User not found."}, status=status.HTTP_404_NOT_FOUND
@@ -72,6 +83,7 @@ class LoginView(APIView):
         )
 
 
+# -------------------- Logout --------------------
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -80,6 +92,7 @@ class LogoutView(APIView):
         return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
 
 
+# -------------------- Me --------------------
 class MeView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -88,3 +101,50 @@ class MeView(APIView):
         return Response(
             {"id": user.id, "name": user.name, "email": user.email, "phone": user.phone}
         )
+
+
+# -------------------- Google One Tap Login --------------------
+@method_decorator(csrf_protect, name="dispatch")
+class GoogleOneTapLoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        try:
+            data = json.loads(request.body)
+            token = data.get("token")
+
+            if not token:
+                return JsonResponse(
+                    {"non_field_errors": ["Token not provided"]}, status=400
+                )
+
+            # Verify token using Google
+            idinfo = id_token.verify_oauth2_token(
+                token,
+                google_requests.Request(),
+                "755316712991-cbk4pp2q2e20ds0800rpu4e87g2bom8h.apps.googleusercontent.com",  # ✅ Your Client ID
+            )
+
+            email = idinfo.get("email")
+            name = idinfo.get("name")
+
+            if not email:
+                return JsonResponse(
+                    {"non_field_errors": ["Email not found in token"]}, status=400
+                )
+
+            # Find or create user
+            user, created = User.objects.get_or_create(
+                email=email, defaults={"username": email, "name": name}
+            )
+
+            login(request, user)
+            return JsonResponse(
+                {"message": "Google login successful", "name": user.name}
+            )
+
+        except ValueError:
+            return JsonResponse({"non_field_errors": ["Invalid token"]}, status=400)
+
+        except Exception as e:
+            return JsonResponse({"non_field_errors": [str(e)]}, status=500)
