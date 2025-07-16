@@ -2,6 +2,7 @@ import { useState } from "react";
 import { login } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { fetchCSRFToken } from "../../utils/csrf";
+import GoogleLoginButton from "../auth/GoogleLoginButton";
 
 const LoginForm = () => {
   const [form, setForm] = useState({ login: "", password: "" });
@@ -27,33 +28,38 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="text"
-        name="login"
-        placeholder="Email or Phone"
-        value={form.login}
-        onChange={handleChange}
-        className="w-full p-2 rounded bg-zinc-800 text-white focus:outline-none"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={handleChange}
-        className="w-full p-2 rounded bg-zinc-800 text-white focus:outline-none"
-        required
-      />
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      <button
-        type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 p-2 rounded font-semibold"
-      >
-        Login
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          name="login"
+          placeholder="Email or Phone"
+          value={form.login}
+          onChange={handleChange}
+          className="w-full p-2 rounded bg-zinc-800 text-white focus:outline-none"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          className="w-full p-2 rounded bg-zinc-800 text-white focus:outline-none"
+          required
+        />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 p-2 rounded font-semibold"
+        >
+          Login
+        </button>
+      </form>
+      <hr />
+      <h3>Or sign up with Google</h3>
+      <GoogleLoginButton />
+    </div>
   );
 };
 
