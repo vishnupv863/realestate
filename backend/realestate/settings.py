@@ -168,7 +168,10 @@ CORS_ALLOW_CREDENTIALS = True
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 # settings.py
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173", "https://your-vercel-site.vercel.app"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "https://realestate-kappa-six.vercel.app",
+]
 
 # Django REST Framework settings
 REST_FRAMEWORK = {

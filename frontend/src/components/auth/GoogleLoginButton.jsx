@@ -15,7 +15,6 @@ const GoogleLoginButton = () => {
 
       // 2. Get the CSRF token from cookie
       const csrfToken = getCookie("csrftoken");
-      console.log("Google Token:", credentialResponse.credential);
 
       // 3. Send token to backend with CSRF header
       const res = await axios.post(

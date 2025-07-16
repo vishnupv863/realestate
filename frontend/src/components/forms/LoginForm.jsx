@@ -3,11 +3,14 @@ import { login } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { fetchCSRFToken } from "../../utils/csrf";
 import GoogleLoginButton from "../auth/GoogleLoginButton";
+import useSessionCheck from "../../hooks/useSessionCheck";
 
 const LoginForm = () => {
   const [form, setForm] = useState({ login: "", password: "" });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useSessionCheck(); // Check if user is already logged in
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
