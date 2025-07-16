@@ -183,8 +183,14 @@ REST_FRAMEWORK = {
     ],
 }
 
-# For HTTPS environments
+# Cookie settings for local development with different ports
 SESSION_COOKIE_SAMESITE = "Lax"
-SESSION_COOKIE_SECURE = False  # ✅ only for local dev
+SESSION_COOKIE_SECURE = False
+
+CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_SECURE = False
+
 CSRF_COOKIE_HTTPONLY = False
+
+SESSION_COOKIE_AGE = 1209600  # e.g., 2 weeks in seconds
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
