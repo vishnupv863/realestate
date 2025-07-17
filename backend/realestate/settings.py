@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-xco4truntp8ni(_u+(scgo7!5z%n07o5de4(i#unl0j5$kafb!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://realestate-ip0y.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -98,15 +98,14 @@ WSGI_APPLICATION = "realestate.wsgi.application"
 
 import os
 
+import dj_database_url
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "realestate",  # ✅ name of your local DB
-        "USER": "postgres",  # your PostgreSQL username (default: postgres)
-        "PASSWORD": "1234",  # the password you set during PostgreSQL install
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),  # Render will inject this
+        conn_max_age=600,  # Optional: persistent connections
+        ssl_require=True,  # Important for production
+    )
 }
 
 
@@ -185,10 +184,10 @@ REST_FRAMEWORK = {
 
 # Cookie settings for local development with different ports
 SESSION_COOKIE_SAMESITE = "Lax"
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True  # Set to True in production
 
 CSRF_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
 
 CSRF_COOKIE_HTTPONLY = False
 
