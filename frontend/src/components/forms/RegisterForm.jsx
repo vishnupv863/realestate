@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/authService";
 import GoogleLoginButton from "../../components/auth/GoogleLoginButton";
+import useSessionCheck from "../../hooks/useSessionCheck";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -14,6 +15,8 @@ const Register = () => {
 
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
+  useSessionCheck(); // Check if user is already logged in
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
