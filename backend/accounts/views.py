@@ -23,7 +23,8 @@ class GetCSRFToken(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        return Response({"message": "CSRF cookie set"}, status=200)
+        token = request.COOKIES.get("csrftoken")
+        return Response({"message": "CSRF cookie set", "csrftoken": token}, status=200)
 
 
 # -------------------- Register --------------------
