@@ -24,6 +24,12 @@ export const register = async (userData) => {
 // Logout user and clear session
 export const logout = async () => {
   await fetchCSRFToken(); // Ensure CSRF token is fetched and cookie is set
+  await new Promise((resolve) => setTimeout(resolve, 100)); // Optional: wait for cookie to be set
+
+  // Debug logs
+  console.log("All cookies:", document.cookie);
+  console.log("CSRF token:", getCookie("csrftoken"));
+
   return await axios.post(
     `${BASE_URL}/auth/logout/`,
     {},
