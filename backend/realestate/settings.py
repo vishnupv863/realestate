@@ -157,12 +157,12 @@ import os
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-dev-key")
 
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     "https://realestate-kappa-six.vercel.app",
     "http://localhost:5173",
 ]
-
-CORS_ALLOW_CREDENTIALS = True
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
@@ -182,14 +182,14 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Cookie settings for local development with different ports
-SESSION_COOKIE_SAMESITE = "Lax"
-SESSION_COOKIE_SECURE = True  # Set to True in production
+# Cookie settings for cross-origin (Vercel + Render)
+SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = True
 
-CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = True
 
-CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = False  # Optional; True is better security
 
-SESSION_COOKIE_AGE = 1209600  # e.g., 2 weeks in seconds
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
