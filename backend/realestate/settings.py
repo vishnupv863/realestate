@@ -99,3 +99,6 @@ CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 
 # ✅ Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
