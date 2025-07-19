@@ -1,61 +1,69 @@
 import { useState } from "react";
+import useSessionCheck from "../../hooks/useSessionCheck";
 import { login } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { fetchCSRFToken } from "../../utils/csrf";
 import GoogleLoginButton from "../auth/GoogleLoginButton";
-import useSessionCheck from "../../hooks/useSessionCheck";
 
 const LoginForm = () => {
   const [form, setForm] = useState({ login: "", password: "" });
   const [error, setError] = useState(null);
+  const [checkingSession, setCheckingSession] = useState(true);
   const navigate = useNavigate();
 
-  useSessionCheck(); // Check if user is already logged in
+  // Run session check on mount, set loading to false when done
+  useSessionCheck(() => setCheckingSession(false));
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setError(null); // clear error when typing
+    setError(null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await fetchCSRFToken();
-      const res = await login(form);
-      console.log("Login success:", res);
-      navigate("/properties"); // redirect to properties page on success
+      await login(form);
+      navigate("/properties");
     } catch (err) {
-      console.error("Login error:", err);
       setError(err.response?.data?.error || "Login failed.");
     }
   };
 
+  if (checkingSession) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="login"
-          placeholder="Email or Phone"
-          value={form.login}
-          onChange={handleChange}
-          className="w-full p-2 rounded bg-zinc-800 text-white focus:outline-none"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full p-2 rounded bg-zinc-800 text-white focus:outline-none"
-          required
-        />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 p-2 rounded font-semibold"
-        >
+        <div>
+          <label htmlFor="login">Login</label>
+          <input
+            type="text"
+            id="login"
+            name="login"
+            value={form.login}
+            onChange={handleChange}
+            required
+            className="input"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            required
+            className="input"
+          />
+        </div>
+        {error && <div className="error">{error}</div>}
+        <button type="submit" className="btn">
           Login
         </button>
       </form>

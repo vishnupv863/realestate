@@ -14,9 +14,11 @@ const Register = () => {
   });
 
   const [message, setMessage] = useState("");
+  const [checkingSession, setCheckingSession] = useState(true);
   const navigate = useNavigate();
 
-  useSessionCheck(); // Check if user is already logged in
+  // Run session check on mount, set loading to false when done
+  useSessionCheck(() => setCheckingSession(false));
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -48,6 +50,10 @@ const Register = () => {
       }
     }
   };
+
+  if (checkingSession) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -101,8 +107,12 @@ const Register = () => {
       </form>
 
       <hr />
-      <h3>Or sign up with Google</h3>
+
       <GoogleLoginButton />
+
+      <p>
+        Already have an account? <a href="/login">Login here</a>
+      </p>
     </div>
   );
 };
