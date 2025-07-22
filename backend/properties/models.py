@@ -1,5 +1,13 @@
+import uuid
+import os
 from django.db import models
 from django.conf import settings
+
+
+def upload_property_image(instance, filename):
+    ext = filename.split(".")[-1]
+    filename = f"{uuid.uuid4()}.{ext}"
+    return os.path.join("property_images", filename)
 
 
 class Property(models.Model):
@@ -18,39 +26,41 @@ class Property(models.Model):
         max_length=255, help_text="City where the property is located."
     )
     location = models.CharField(max_length=255, help_text="Location of the property.")
+
     images = models.ImageField(
-        upload_to="property_images/", help_text="Image of the property."
+        upload_to=upload_property_image, help_text="Image of the property."
     )
     image_2 = models.ImageField(
-        upload_to="property_images/",
+        upload_to=upload_property_image,
         blank=True,
         null=True,
         help_text="Optional second image of the property.",
     )
     image_3 = models.ImageField(
-        upload_to="property_images/",
+        upload_to=upload_property_image,
         blank=True,
         null=True,
         help_text="Optional third image of the property.",
     )
     image_4 = models.ImageField(
-        upload_to="property_images/",
+        upload_to=upload_property_image,
         blank=True,
         null=True,
         help_text="Optional fourth image of the property.",
     )
     image_5 = models.ImageField(
-        upload_to="property_images/",
+        upload_to=upload_property_image,
         blank=True,
         null=True,
         help_text="Optional fifth image of the property.",
     )
     image_6 = models.ImageField(
-        upload_to="property_images/",
+        upload_to=upload_property_image,
         blank=True,
         null=True,
         help_text="Optional sixth image of the property.",
     )
+
     created_at = models.DateTimeField(
         auto_now_add=True, help_text="The date and time when the property was created."
     )
