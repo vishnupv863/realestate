@@ -1,6 +1,6 @@
-from .views import property_list
 from django.urls import path
+from .views import submit_property
 
 urlpatterns = [
-    path("properties/", property_list, name="property_list"),
+    path("submit-property/", submit_property, name="submit_property"),
 ]
