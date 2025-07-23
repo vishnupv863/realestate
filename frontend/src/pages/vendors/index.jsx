@@ -5,7 +5,7 @@ function Vendors() {
   const isAuthenticated = useSessionCheck();
 
   if (isAuthenticated === null) return <p>Checking session...</p>;
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (!isAuthenticated) return <Navigate to="/auth" replace />;
 
   return (
     <div>

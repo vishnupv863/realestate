@@ -1,18 +1,13 @@
 import { useState } from "react";
-import useSessionCheck from "../../hooks/useSessionCheck";
 import { login } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { fetchCSRFToken } from "../../utils/csrf";
-import GoogleLoginButton from "../auth/GoogleLoginButton";
 
 const LoginForm = () => {
   const [form, setForm] = useState({ login: "", password: "" });
   const [error, setError] = useState(null);
-  const [checkingSession, setCheckingSession] = useState(true);
-  const navigate = useNavigate();
 
-  // Run session check on mount, set loading to false when done
-  useSessionCheck(() => setCheckingSession(false));
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,15 +19,11 @@ const LoginForm = () => {
     try {
       await fetchCSRFToken();
       await login(form);
-      navigate("/properties");
+      navigate("/vendors");
     } catch (err) {
       setError(err.response?.data?.error || "Login failed.");
     }
   };
-
-  if (checkingSession) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
@@ -67,9 +58,6 @@ const LoginForm = () => {
           Login
         </button>
       </form>
-      <hr />
-      <h3>Or sign up with Google</h3>
-      <GoogleLoginButton />
     </div>
   );
 };

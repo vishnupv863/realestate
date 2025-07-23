@@ -18,6 +18,7 @@ const useSessionCheck = () => {
         });
         setIsAuthenticated(res.status === 200);
       } catch (err) {
+        console.log("Session not active:", err);
         setIsAuthenticated(false);
       }
     };
@@ -25,7 +26,7 @@ const useSessionCheck = () => {
     checkLogin();
   }, []);
 
-  return isAuthenticated;
+  return isAuthenticated; // null → loading, true/false → auth status
 };
 
 export default useSessionCheck;

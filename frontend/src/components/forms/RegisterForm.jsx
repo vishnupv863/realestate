@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/authService";
-import GoogleLoginButton from "../../components/auth/GoogleLoginButton";
-import useSessionCheck from "../../hooks/useSessionCheck";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -14,11 +12,7 @@ const Register = () => {
   });
 
   const [message, setMessage] = useState("");
-  const [checkingSession, setCheckingSession] = useState(true);
   const navigate = useNavigate();
-
-  // Run session check on mount, set loading to false when done
-  useSessionCheck(() => setCheckingSession(false));
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -50,10 +44,6 @@ const Register = () => {
       }
     }
   };
-
-  if (checkingSession) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
@@ -105,14 +95,6 @@ const Register = () => {
         </div>
         <button type="submit">Register</button>
       </form>
-
-      <hr />
-
-      <GoogleLoginButton />
-
-      <p>
-        Already have an account? <a href="/login">Login here</a>
-      </p>
     </div>
   );
 };
