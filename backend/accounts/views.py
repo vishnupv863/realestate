@@ -46,6 +46,7 @@ class RegisterView(APIView):
 
 
 # -------------------- Login (email or phone) --------------------
+@method_decorator(ensure_csrf_cookie, name="dispatch")
 class LoginView(APIView):
     permission_classes = [AllowAny]
 

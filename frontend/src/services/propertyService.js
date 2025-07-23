@@ -1,5 +1,6 @@
 import axios from "axios";
-import { BASE_URL } from "../config"; // assuming config.js exports VITE_API_URL
+import { BASE_URL } from "../config";
+import { getCookie } from "../utils/cookies";
 
 export const submitProperty = async (formData) => {
   try {
@@ -7,8 +8,10 @@ export const submitProperty = async (formData) => {
       `${BASE_URL}/properties/submit-property/`,
       formData,
       {
+        withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",
+          "X-CSRFToken": getCookie("csrftoken"),
         },
       }
     );

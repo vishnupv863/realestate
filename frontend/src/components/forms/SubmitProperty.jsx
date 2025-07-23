@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { submitProperty } from "../../services/propertyService";
+import { useNavigate } from "react-router-dom";
 
 const SubmitProperty = () => {
+  const navigate = useNavigate();
+  // Initial form state
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -33,6 +36,7 @@ const SubmitProperty = () => {
 
     try {
       const result = await submitProperty(formData);
+      navigate("/vendors"); // Redirect to vendors page on success
       console.log("Upload successful:", result);
     } catch (error) {
       console.error("Upload failed:", error);
@@ -48,6 +52,7 @@ const SubmitProperty = () => {
         gap: "12px",
         width: "300px",
       }}
+      encType="multipart/form-data"
     >
       <input
         type="text"

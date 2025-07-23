@@ -1,9 +1,11 @@
+from urllib import request
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import PropertyForm
+from django.contrib.auth.decorators import login_required
 
 
-@csrf_exempt  # You can replace this with @login_required if session-based auth is used
+@login_required
 def submit_property(request):
     if request.method != "POST":
         return JsonResponse(
@@ -11,8 +13,12 @@ def submit_property(request):
             status=405,
         )
 
+    print("POST keys:", request.POST.keys())
+    print("FILES keys:", request.FILES.keys())
+
     form = PropertyForm(request.POST, request.FILES)
     if not form.is_valid():
+        print("Validation errors:", form.errors)
         return JsonResponse({"status": "error", "errors": form.errors}, status=400)
 
     # Step 1: Save core metadata, but delay full commit to assign broker

@@ -5,7 +5,7 @@ from .models import Property
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
-        fields = "__all__"
+        exclude = ["broker"]
 
     def clean(self):
         cleaned_data = super().clean()
