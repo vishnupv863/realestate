@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { submitProperty } from "../services/propertyService";
+import { submitProperty } from "../../services/propertyService";
 
 const SubmitProperty = () => {
   const [form, setForm] = useState({

@@ -7,10 +7,6 @@ function Home() {
       <br />
       <Link to="/vendors">Vendors?</Link>
       <br />
-      <Link to="/login">Login</Link>
-      <br />
-      <Link to="/register">Register</Link>
-      <br />
     </div>
   );
 }

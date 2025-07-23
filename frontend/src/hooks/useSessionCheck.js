@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../config";
 import { getCookie } from "../utils/cookies";
 
-const useSessionCheck = (onFinish) => {
-  const navigate = useNavigate();
+const useSessionCheck = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -17,18 +16,16 @@ const useSessionCheck = (onFinish) => {
             "X-CSRFToken": csrfToken,
           },
         });
-        if (res.status === 200) {
-          navigate("/properties");
-        }
+        setIsAuthenticated(res.status === 200);
       } catch (err) {
-        // Not logged in
-      } finally {
-        if (onFinish) onFinish();
+        setIsAuthenticated(false);
       }
     };
 
     checkLogin();
   }, []);
+
+  return isAuthenticated;
 };
 
 export default useSessionCheck;
