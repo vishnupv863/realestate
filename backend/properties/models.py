@@ -70,3 +70,6 @@ class Property(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_short_name(self):
+        return self.title or self.description
