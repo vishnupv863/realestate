@@ -3,6 +3,7 @@ import { BASE_URL } from "../config";
 import { getCookie } from "../utils/cookies";
 
 export const submitProperty = async (formData) => {
+  console.log("Submitting property with data:", formData);
   try {
     const response = await axios.post(
       `${BASE_URL}/properties/submit-property/`,

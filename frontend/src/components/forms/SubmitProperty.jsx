@@ -37,7 +37,6 @@ const SubmitProperty = () => {
     try {
       const result = await submitProperty(formData);
       navigate("/vendors"); // Redirect to vendors page on success
-      console.log("Upload successful:", result);
     } catch (error) {
       console.error("Upload failed:", error);
     }

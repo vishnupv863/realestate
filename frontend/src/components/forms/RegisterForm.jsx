@@ -33,7 +33,7 @@ const Register = () => {
         password: form.password,
         confirm_password: form.confirmPassword, // ✅ underscore
       });
-      navigate("/properties");
+      navigate("/vendors"); // ✅ redirect to vendors page on success
     } catch (error) {
       const errorData = error.response?.data;
       if (errorData) {

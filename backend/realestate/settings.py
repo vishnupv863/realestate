@@ -124,28 +124,3 @@ STORAGES = {
     "default": {"BACKEND": "realestate.storages_backends.MediaStorage"},
     "staticfiles": {"BACKEND": "realestate.storages_backends.StaticStorage"},
 }
-
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,  # important if you're using Django default logging
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-        },
-        "botocore": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-        },
-        "boto3": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-        },
-    },
-}
