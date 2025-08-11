@@ -1,12 +1,6 @@
-Django==5.2.3
+dj_database_url==3.0.1
+Django==5.2.5
+django_storages==1.14.6
 djangorestframework==3.16.0
-djangorestframework_simplejwt==5.5.0
-django-allauth==65.10.0
-django-cors-headers==4.7.0
-dj-database-url==3.0.1
-django-storages==1.14.6
-Pillow==11.2.1
-psycopg2-binary==2.9.10
-whitenoise==6.9.0
-gunicorn  # If deploying to production
-boto3==1.39.9  # Only if you're using AWS S3
+protobuf==6.31.1
+python-dotenv==1.1.1
