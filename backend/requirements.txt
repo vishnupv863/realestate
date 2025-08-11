@@ -4,3 +4,4 @@ django_storages==1.14.6
 djangorestframework==3.16.0
 protobuf==6.31.1
 python-dotenv==1.1.1
+django-cors-headers
