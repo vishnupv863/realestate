@@ -12,7 +12,7 @@ export default function PropertiesPage() {
 
   return (
     <div className="properties-page">
-      <h1>Properties</h1>
+      <h1>Properties List</h1>
       {/* <div className="property-list">
         {properties.map((property) => (
           <PropertyCard key={property.id} property={property} />
