@@ -51,4 +51,4 @@ def submit_property(request):
 
 
 def health_check(request):
-    return JsonResponse({"status": "ok"})
+    return JsonResponse({"status": "okey"})

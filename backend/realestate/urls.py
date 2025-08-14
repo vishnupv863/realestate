@@ -19,14 +19,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import JsonResponse
-from properties.views import health_check
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("accounts.urls")),
     path("properties/", include("properties.urls")),
-    path("", health_check, name="health_check"),
+    path("", include("properties.urls")),  
 ]
 
 if settings.DEBUG:
