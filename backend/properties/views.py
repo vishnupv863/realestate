@@ -47,3 +47,7 @@ def submit_property(request):
     }
 
     return JsonResponse(response_data, status=201)
+
+
+def sample_view(request):
+    return JsonResponse({"message": "This is a sample view."})

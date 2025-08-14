@@ -20,10 +20,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from backend import properties
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("accounts.urls")),
     path("properties/", include("properties.urls")),
+    path("", include("properties.urls")),
 ]
 
 if settings.DEBUG:
