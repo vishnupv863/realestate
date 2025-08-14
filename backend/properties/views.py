@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import PropertyForm
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 @login_required
@@ -49,5 +50,5 @@ def submit_property(request):
     return JsonResponse(response_data, status=201)
 
 
-def sample_view(request):
-    return JsonResponse({"message": "This is a sample view."})
+def health_check(request):
+    return JsonResponse({"status": "ok"})
