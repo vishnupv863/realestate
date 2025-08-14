@@ -26,7 +26,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("accounts.urls")),
     path("properties/", include("properties.urls")),
-    path("", include("properties.urls")),
+    path("/", include("properties.urls")),
 ]
 
 if settings.DEBUG:
